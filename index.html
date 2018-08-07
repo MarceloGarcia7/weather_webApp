@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>FORECAST WEATHER</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="FORECAST WEATHER" />
+  <link rel="shortcut icon" sizes="196x196" href="images/Weather-PNG-HD.png">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="Css/cssweather.css" rel="stylesheet">
+</head>
+
+<body>
+  <!--<div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <label id="nameLabel" style="color: aliceblue">Name: <input id="nameCity" style="color: black" type="text" name="nameCity"></label>
+      <button id="myBtn">Submit</button>
+      <p id="mnsjModal" style="color :white">Please enter your City</p>
+    </div>
+  </div>-->
+
+  <div id="app" class="contenedor flex">
+    <div class="actualCity flex">
+      <h3>{{forecast.city.name}}</h3>
+      <h4>{{forecast.list[0].newDate2}}</h4>
+    </div>
+
+    <div id="severalCity" class="nnnnnnn">
+      <div class="severalCity flex" v-for="item in severalCity" v-on:click="selectCity(item.name, item.sys.country)">
+        <div class="cityName">
+          <h3>{{item.name}}</h3>
+        </div>
+        <div class="detalleCity">
+          <h3>{{item.main.temp.toFixed(0)}}º</h3>
+          <img class="icon" v-bind:src="item.weather[0].iconima">
+        </div>
+      </div>
+    </div>
+
+    <div id="mainSelectedCity" class="mainSelectedCity">
+      <div id="selectedCity" class="selectedCity flex">
+        <div class="selectedCityName">
+          <h3>{{forecast.list[0].main.temp.toFixed(0)}}º</h3>
+          <h5>{{forecast.list[0].weather[0].description}}</h5>
+          <h5>{{forecast.list[0].main.temp_max.toFixed(0)}}º / {{forecast.list[0].main.temp_min.toFixed(0)}}º</h5>
+        </div>
+        <div class="selectedDetalleCity">
+          <img class="icon2" v-bind:src="forecast.list[0].weather[0].iconima">
+        </div>
+      </div>
+
+      <div class="scrollingwrapper">
+        <div class="temp" v-for="item in filterByToday">
+          <div class="detail">
+            <h5>{{item.newTime}}</h5>
+            <img class="iconDetail" v-bind:src="item.weather[0].iconima">
+            <h5>{{item.main.temp.toFixed(0)}}º</h5>
+          </div>
+        </div>
+      </div>
+      <div class="filterByDay" v-for="item in filterByDay">
+        <div class="detalleDay">
+          <h5>{{item.newDate}}</h5>
+        </div>
+        <div class="detalleDay2">
+          <p><img class="iconDetaille" v-bind:src="item.weather[0].iconima"></p>
+          <h5>{{item.main.temp.toFixed(0)}}º</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <a href="index.html" class="glyphicon glyphicon-home"></a>
+    <div class="searchCity">
+      <input id="nameCity" class="searchBar" type="text" name="nameCity" placeholder="v-bind:src = item.name">
+      <button id="myBtnSearch" class="myBtn glyphicon glyphicon-search"></button>
+    </div>
+   <!-- <a href="#" id="calendar" class="glyphicon glyphicon-plus" onclick="openModalWindow()"></a>-->
+  </div>
+  
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCE8uEM5LCkLFPCGb8g1ERS2AlE9aqIFI4",
+      authDomain: "weather-eff1f.firebaseapp.com",
+      databaseURL: "https://weather-eff1f.firebaseio.com",
+      projectId: "weather-eff1f",
+      storageBucket: "weather-eff1f.appspot.com",
+      messagingSenderId: "707992955794"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="weatherJscript.js"></script>
+
+</body>
+
+</html>
